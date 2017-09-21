@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1,maximum-scale=1, user-scalable=no">
+    <title>梦瑶·萌萌哒~</title>
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+
+<body>
+    <div style="max-width:780px;margin-left: auto;margin-right: auto;">
+        <div class="nav">
+            <ul>
+                <li data-id="1">最爱</li>
+                <li class="active" data-id="2">最新</li>
+                <li data-id="3">照片</li>
+                <li data-id="4">视频</li>
+            </ul>
+            <a href="javascript:;"><big>+</big></a>
+        </div>
+        <div class="items">
+            <% include data.html %>
+        </div>
+    </div>
+    <div class="footer">
+        <p>©2017 Powered by <a href="//liuzy88.com" target="_blank"><u>liuzy88.com</u></a></p>
+        <p>湘ICP备16014575号-1</p>
+    </div>
+    <div class="gotop hide">
+        <a title="返回顶部" href="javascript:;"></a>
+    </div>
+    <div class="tip" style="display: none;"></div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>

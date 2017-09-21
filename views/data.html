@@ -1,0 +1,30 @@
+<% for (i in data) { %>
+    <div class="item" id="item<%=data[i].id%>">
+        <div class="img">
+            <% if (data[i].img.endsWith('.mp4')) { %>
+            <div class="video">
+                <video width="100%" height="auto" controls="controls" preload="none" poster="<%=EJS.video(data[i].img)%>?vframe/jpg/offset/0" webkit-playsinline="true" playsinline="true" x-webkit-airplay="true" x5-video-player-type="h5" x5-video-orientation="h5" x5-video-player-fullscreen="true" style="object-fit:fill">
+                    <source src="<%=EJS.video(data[i].img)%>" type="video/mp4">
+                </video>
+            </div>
+            <% } else { %>
+            <img src="<%=EJS.url(data[i])%>" width="100%" height="auto">
+            <% } %>
+            <div class="ctime"><span><%=EJS.date(data[i].ctime)%></span></div>
+            <div class="tags">
+                <% if (data[i].tag) { var tags = data[i].tag.split(','); for (j in tags) { %>
+                <span><%=tags[j]%></span>
+                <% }} %>
+            </div>
+        </div>
+        <div class="text"><span><%=data[i].text||'什么都没写...'%></span></div>
+        <div class="btns">
+            <div class="like">
+                <a href="javascript:like('<%=data[i].id%>');"></a><em class="bold" data-id="<%=data[i].id%>"><%=data[i].like%></em>
+            </div>
+            <div class="commnt">
+                <a href="javascript:;">评论</a><em class="bold">(0)</em>
+            </div>
+        </div>
+    </div>
+<% } %>
