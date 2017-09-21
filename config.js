@@ -7,7 +7,7 @@ var product = {
     src: '/upload/',
     tags: tags,
     db: {
-        host: "rdsek2544l3699q650sdo.mysql.rds.aliyuncs.com",
+        host: "127.0.0.1",
         port: 3306,
         user: "liuzy",
         password: "111111",
@@ -35,8 +35,8 @@ var develop = {
         database: "myao"
     },
     qiniu: {
-        bucket: 'static',
-        bucketUrl: 'http://cdn.liuzy88.com/',
+        bucket: 'liuzy',
+        bucketUrl: 'http://qiniu-liuzy.liuzy88.com/',
         ACCESS_KEY: 'pkWsJ97yNvN-adSgY46kjIH72y1mDiO-v88dK7lc',
         SECRET_KEY: 'jIqelhXHUk-FB3iUsiMyHLEcMlaVDTFlmjZxAcKs'
     }

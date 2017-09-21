@@ -9,41 +9,42 @@
 </head>
 
 <body>
-    <div style="display: none;">
-        <input type="file" id="up-file" value="" onchange="fileChange(this)">
-    </div>
-    <div class="uploading" style="display: none;">
-        <div class="loading-bg"></div>
-        <div class="loading-img"><img src="/imgs/loading.gif"></div>
-    </div>
-    <div class="header">
-        <span>^_^ 梦瑶宝贝的靓照~~</span>
-        <a href="/">返回</a>
-    </div>
-    <div class="up">
-        <div class="up-img">
-            <img id="up-img" src="/imgs/default.gif" width="100%" height="auto" onclick="javascript:$('#up-file')[0].click();">
+    <div class="content">
+        <div style="display: none;">
+            <input type="file" id="up-file" value="">
         </div>
-        <div class="up-form">
-            <div class="up-tags">
-                <% for ( i in tags) { %>
-                <label for="tag<%=i%>"><input type="checkbox" id="tag<%=i%>" name="tag" value="<%=tags[i]%>"><%=tags[i]%></label>
-                <% } %>
-            </div>
-            <div class="up-ctime">
-                <input type="text" id="ctime" name="ctime" placeholder="拍摄时间，默认今天" value="">
-            </div>
-            <div class="up-text">
-                <textarea id="text" name="text" cols="30" rows="5" placeholder="写点什么吧..."></textarea>
-            </div>
-            <div class="up-btn">
-                <button id="upload" onclick="toupload();">上 传</button>
-            </div>
+        <div class="uploading" style="display: none;">
+            <div class="loading-bg"></div>
+            <div class="loading-img"><img src="/imgs/loading.gif"></div>
         </div>
-        <div class="up-desc">
-            <p><small>请选择照片上传；</small></p>
-            <p><small>标签显示在右上角，最好不要超过三个；</small></p>
-            <p><small>拍摄时间会显示在右下角。</small></p>
+        <div class="up">
+            <div class="header">
+                <span>^_^ 梦瑶宝贝的靓照~~</span> <a href="/">返回</a>
+            </div>
+            <div class="up-img">
+                <img id="up-img" src="/imgs/default.gif" width="100%" height="auto" onclick="javascript:$('#up-file')[0].click();">
+            </div>
+            <div class="up-form">
+                <div class="up-tags">
+                    <% for ( i in tags) { %>
+                    <label for="tag<%=i%>"><input type="checkbox" id="tag<%=i%>" name="tag" value="<%=tags[i]%>"><%=tags[i]%></label>
+                    <% } %>
+                </div>
+                <div class="up-ctime">
+                    <input type="text" id="ctime" name="ctime" placeholder="拍摄时间，默认今天" value="">
+                </div>
+                <div class="up-text">
+                    <textarea id="text" name="text" cols="30" rows="5" placeholder="写点什么吧..."></textarea>
+                </div>
+                <div class="up-btn">
+                    <button id="upload" onclick="toupload();">上 传</button>
+                </div>
+            </div>
+            <div class="up-desc">
+                <p><small>请选择照片上传；</small></p>
+                <p><small>标签显示在右上角，最好不要超过三个；</small></p>
+                <p><small>拍摄时间会显示在右下角。</small></p>
+            </div>
         </div>
     </div>
     <script src="/js/jquery.min.js"></script>

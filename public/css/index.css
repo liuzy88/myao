@@ -208,6 +208,15 @@ em {
 
 /* upload */
 
+.content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.header {
+    padding: 8px 0;
+}
+
 .uploading {
     z-index: 999;
 }
@@ -240,7 +249,6 @@ em {
 
 .up {
     padding: 20px 20px;
-    margin: 10px 0;
     box-shadow: rgba(35, 25, 25, 0.498039) 0px 1px 5px;
     background: #fff;
 }
@@ -249,7 +257,6 @@ em {
     width: 100%;
     min-height: 80px;
     position: relative;
-    border-radius: 4px;
     cursor: pointer;
 }
 
