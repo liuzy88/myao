@@ -2,8 +2,8 @@
 
 var product = {
     exe: 'D:/ffmpeg/bin/ffmpeg.exe',
-    inDir: 'E:/myao-temp',
-    outDir: 'E:/myao-video',
+    inDir: 'D:/myao-temp',
+    outDir: 'D:/myao-video',
     src: '/upload/',
     tags: tags,
     db: {
@@ -23,8 +23,8 @@ var product = {
 
 var develop = {
     exe: 'D:/ffmpeg/bin/ffmpeg.exe',
-    inDir: 'E:/myao-temp',
-    outDir: 'E:/myao-video',
+    inDir: 'D:/myao-temp',
+    outDir: 'D:/myao-video',
     src: '/upload/',
     tags: tags,
     db: {

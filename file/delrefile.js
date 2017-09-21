@@ -1,6 +1,7 @@
 var fs = require('fs');
 var path = require('path');
 var MyFile = require('./myfile');
+var config = require('../config');
 var Logger = require('../lib/logger');
 
 function listFiles(dir) {
@@ -21,16 +22,16 @@ function listFiles(dir) {
     return arrys;
 }
 
-var tempDir = 'E:/梦瑶2017视频合集';
-var targetDir = 'F:/myao-video';
+var inDir = config.inDir;
+var outDir = config.outDir
 
-// MyFile.renameAll(targetDir); // 不要对转码后的文件重命名
-MyFile.clearAll(targetDir);
+// MyFile.renameAll(outDir); // 不要对转码后的文件重命名
+MyFile.clearAll(outDir);
 
-var tempfiles = listFiles(tempDir);
-var targetfiles = listFiles(targetDir);
+var tempfiles = listFiles(inDir);
+var targetfiles = listFiles(outDir);
 
-Logger.log('targetDir has', targetfiles.length);
+Logger.log('outDir has', targetfiles.length);
 
 for (i in targetfiles) {
     var target = targetfiles[i];
@@ -38,10 +39,10 @@ for (i in targetfiles) {
         var temp = tempfiles[j];
         if (target.split('_')[1] == temp.split('_')[1]) {
             Logger.log('delete file:', target, 'because', temp);
-            fs.unlinkSync(path.join(targetDir, target));
+            fs.unlinkSync(path.join(outDir, target));
             break;
         }
     }
 }
 
-Logger.log('done. it have', listFiles(targetDir).length);
+Logger.log('done. it have', listFiles(outDir).length);
