@@ -9,11 +9,31 @@ var MyFile = require('./myfile');
 
 var outDir = config.outDir;
 
+var upstat = 'upstat';
+var upstatus = {};
+if (fs.existsSync(upstat)) {
+    var upsuccess = fs.readFileSync(upstat).toString().split(/\r?\n/ig);
+    var count = 0;
+    for (i in upsuccess) {
+        if (upsuccess) {
+            count++;
+            upstatus[upsuccess] = true;
+        }
+    }
+    Logger.log('load end,', count, 'well be cancel.');
+}
+function remember(f) {
+    fs.appendFileSync(upstat, f + '\n', {});
+}
+function forgetit() {
+    fs.unlinkSync(upstat);
+}
+
 // 上传到七牛 生成SQL语句
 qiniu.conf.ACCESS_KEY = config.qiniu.ACCESS_KEY;
 qiniu.conf.SECRET_KEY = config.qiniu.SECRET_KEY;
 
-var workCount = 5; // 工作个数
+var workCount = 20; // 工作个数
 var works = []; // 工作者
 for (var i = 1; i <= workCount; i++) {
     works.push('work_' + i);
@@ -26,28 +46,38 @@ function working(work, f) {
     var hash = f.split('_')[1].split('.')[0];
     var ctime = f.split('_')[0];
     var client = new qiniu.rs.Client();
-    client.stat(config.qiniu.bucket, f, function(err, ret) {
-        if (err) { // 七牛没有这个文件
-            var putPolicy = new qiniu.rs.PutPolicy(config.qiniu.bucket + ':' + f);
-            var token = putPolicy.token();
-            qiniu.io.putFile(token, f, path.join(outDir, f), null, function(err, ret) {
-                if (err) {
-                    Logger.log(work, 'upload error:', f, err);
-                    works.push(work);
-                } else {
-                    // 上传成功
-                    Logger.log(work, 'upload success:', ret.key, '->', ret.hash);
-                    okList.push({ hash: hash, img: f, ctime: ctime });
-                    works.push(work);
-                }
-            });
-        } else {
-            // 取消上传
-            Logger.log(work, 'upload cancel:', f);
-            okList.push({ hash: hash, img: f, ctime: ctime });
-            works.push(work);
-        }
-    });
+    if (upstatus[f]) {
+        // 上传取消
+        Logger.log(work, 'cancel upload:', f);
+        okList.push({ hash: hash, img: f, ctime: ctime });
+        works.push(work);
+    } else {
+        client.stat(config.qiniu.bucket, f, function(err, ret) {
+            if (err) { // 七牛没有这个文件
+                var putPolicy = new qiniu.rs.PutPolicy(config.qiniu.bucket + ':' + f);
+                var token = putPolicy.token();
+                qiniu.io.putFile(token, f, path.join(outDir, f), null, function(err, ret) {
+                    if (err) {
+                        Logger.log(work, 'upload error:', f, err);
+                        works.push(work);
+                    } else {
+                        // 上传成功
+                        Logger.log(work, 'upload success:', ret.key, '->', ret.hash);
+                        remember(f);
+                        okList.push({ hash: hash, img: f, ctime: ctime });
+                        works.push(work);
+                    }
+                });
+            } else {
+                // 取消上传
+                Logger.log(work, 'upload cancel:', f);
+                remember(f);
+                okList.push({ hash: hash, img: f, ctime: ctime });
+                works.push(work);
+            }
+        });
+    }
+    
 }
 
 function start() {
@@ -62,6 +92,7 @@ function start() {
     }
     if (files.length == 0 && works.length == workCount) {
         Logger.log('upload finished.');
+        forgetit();
         if (okList.length > 0) {
             var sqls = [];
             for (i in okList) {
