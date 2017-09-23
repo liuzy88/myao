@@ -1,31 +1,27 @@
-var Table = require('./table');
-var Query = require('./query');
-var PMS = require('./pms');
-
-var DB = {};
-
-function isValue(value) {
-    return PMS.isValue(value) && value != '';
-}
+const Query = require('./query')
+const Table = require('./table')
+const DB = {}
 
 DB.Myao = new Table('myao', {
 	findbyHash: function(hash) {
-		var sql = 'SELECT `id` FROM `myao` WHERE `hash`=? LIMIT 1';
-		var pms = [hash];
-		return Query(sql, pms);
+		let sql = 'SELECT `id` FROM `myao` WHERE `hash`=? LIMIT 1'
+		let pms = [hash]
+		return Query(sql, pms)
 	},
 	updatebyHash: function(params) {
-		var sql = 'UPDATE `myao` SET `img`=?,`cdn`=? WHERE `hash`=?';
-		var pms = [params.img, params.cdn, params.hash];
-		return Query(sql, pms);
+		let sql = 'UPDATE `myao` SET `img`=?,`cdn`=? WHERE `hash`=?'
+		let pms = [params.img, params.cdn, params.hash]
+		return Query(sql, pms)
 	},
 	like: function(id) {
-		var sql = 'UPDATE `myao` SET `like`=`like`+1 WHERE `id`=?';
-		var pms = [id];
-		return Query(sql, pms);
+		let sql = 'UPDATE `myao` SET `like`=`like`+1 WHERE `id`=?'
+		let pms = [id]
+		return Query(sql, pms)
 	}
-});
+})
 
-DB.Topic = new Table('reply', {});
+DB.close = function() {
+	Query.end()
+}
 
-module.exports = DB;
+module.exports = DB

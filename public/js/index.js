@@ -43,6 +43,7 @@ function like(id) {
 // 加载下一页
 var nextPage = 2;
 var pageIsEnd = false;
+
 function loading() {
     if (pageIsEnd) return;
     $('.items').addClass('loading');

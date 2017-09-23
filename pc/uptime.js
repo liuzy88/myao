@@ -1,10 +1,11 @@
 const fs = require('fs')
 const path = require('path')
-const MyFile = require('./myfile')
+const crypto = require('crypto')
+const MF = require('../lib/mf')
 
 function md5(file) {
-	var data = fs.readFileSync(file);
-	return crypto.createHash('md5').update(data).digest('hex');
+	var data = fs.readFileSync(file)
+	return crypto.createHash('md5').update(data).digest('hex')
 }
 
 let inDir = 'D:/myao-video' // 要改的文件目录
@@ -12,11 +13,11 @@ let inDir2 = 'D:/video' // 正确的文件目录
 let outDir = 'D:/myao-video2' // 输出的文件目录
 
 // 1.重命名inDir2下的文件
-MyFile.renameAll(inDir2);
-MyFile.clearAll(inDir2);
+MF.renameAll(inDir2)
+MF.clearAll(inDir2)
 
-let inFiles = MyFile.listFiles(inDir)
-let inFiles2 = MyFile.listFiles(inDir2)
+let inFiles = MF.listFiles(inDir)
+let inFiles2 = MF.listFiles(inDir2)
 
 // 2.遍历要改的文件，去正确的文件找MD5
 for (i in inFiles) {

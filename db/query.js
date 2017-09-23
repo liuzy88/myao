@@ -1,29 +1,33 @@
-var Promise = require('promise');
-var mysql = require('mysql');
-var Logger = require('../lib/logger');
-var db = require('../config').db;
-var pool = mysql.createPool(db);
+const mysql = require('mysql')
+const log = require('../lib/log')
+const config = require('../config')
+const pool = mysql.createPool(config.db)
 
 function Query(sql, pms) {
-    return new Promise(function(resolve, reject) {
-        pool.getConnection(function(err, conn) {
-            if (err) {
-                Logger.log(err.stack);
-                reject(err.stack);
-            }
-            Logger.log('[SQL]', sql);
-            Logger.log('[PMS]', pms.toString());
-            conn.query(sql, pms, function(err, rows) {
-                if (err) {
-                    Logger.log(err.stack);
-                    reject(err.stack);
-                }
-                Logger.log('[ROW]', JSON.stringify(rows));
-                resolve(rows);
-                conn.release();
-            });
-        });
-    }.bind(pool));
+	return function(cb) {
+		pool.getConnection(function(err, conn) {
+			if (err) {
+				log(err.stack)
+				cb(err, null)
+			}
+			log('[SQL]', sql)
+			log('[PMS]', pms.toString())
+			conn.query(sql, pms, function(err, rows) {
+				conn.release()
+				if (err) {
+					log(err.stack)
+					cb(err, null)
+				} else {
+					log('[ROW]', JSON.stringify(rows))
+					cb(null, rows)
+				}
+			})
+		})
+	}
 }
 
-module.exports = Query;
+Query.end = function() {
+	pool.end()
+}
+
+module.exports = Query

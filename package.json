@@ -1,14 +1,16 @@
 {
   "name": "myao",
-  "version": "0.1.0",
-  "description": "myao",
-  "repository": "liuzy88.com",
+  "version": "0.2.0",
+  "description": "myaomengmengda",
+  "repository": "https://github.com/liuzy88/myao-web.git",
+  "author": "liuzy88",
   "license": "ISC",
   "scripts": {
     "start": "node app.js"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
+    "co": "^4.6.0",
     "ejs": "^2.5.2",
     "express": "^4.14.0",
     "mysql": "^2.11.1",
