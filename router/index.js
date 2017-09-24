@@ -21,6 +21,7 @@ router.get('/', function(req, res, next) {
 	}
 	co(function*() {
 		if (req.query.p > 0) {
+			params.page = req.query.p
 			let rows1 = yield DB.Myao.searchCount(params)
 			let count = rows1[0].num
 			if (params.page > Math.ceil(count / params.rows)) {
