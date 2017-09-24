@@ -51,18 +51,16 @@ router.post('/like', function(req, res, next) {
 	}
 })
 
-router.post('/cb', function(req, res, next) {
+router.post('/upcb', function(req, res, next) {
 	let img = req.body.img
 	let sign = req.body.sign
 	if (/[\d]{14}_[\w]{32}\.[\w]{3}/.test(img) && /[\w]{32}/.test(sign)) {
 		co(function*() {
 			let ctime = img.split('_')[0]
 			let hash = img.split('_')[1].split('.')[0]
-			let rows = yield DB.Myao.insert({
+			let rows = yield DB.Myao.replace({
 				hash: hash,
 				img: img,
-				tag: '',
-				text: '',
 				ctime: ctime,
 				cdn: 1
 			})
@@ -71,6 +69,8 @@ router.post('/cb', function(req, res, next) {
 			} else {
 				res.end('no')
 			}
+		}).catch(function(err) {
+			res.end('co error.')
 		})
 	} else {
 		res.end('params error.')

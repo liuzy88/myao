@@ -8,7 +8,7 @@ function Query(sql, pms) {
 		pool.getConnection(function(err, conn) {
 			if (err) {
 				log(err.stack)
-				cb(err, null)
+				cb(err.stack, undefined)
 			}
 			log('[SQL]', sql)
 			log('[PMS]', pms.toString())
@@ -16,10 +16,10 @@ function Query(sql, pms) {
 				conn.release()
 				if (err) {
 					log(err.stack)
-					cb(err, null)
+					cb(err.stack, undefined)
 				} else {
 					log('[ROW]', JSON.stringify(rows))
-					cb(null, rows)
+					cb(undefined, rows)
 				}
 			})
 		})

@@ -3,11 +3,6 @@ const path = require('path')
 const crypto = require('crypto')
 const MF = require('../lib/mf')
 
-function md5(file) {
-	var data = fs.readFileSync(file)
-	return crypto.createHash('md5').update(data).digest('hex')
-}
-
 let inDir = 'D:/myao-video' // 要改的文件目录
 let inDir2 = 'D:/video' // 正确的文件目录
 let outDir = 'D:/myao-video2' // 输出的文件目录
