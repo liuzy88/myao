@@ -1,6 +1,6 @@
 ﻿var config = {
 	dev: false,
-	port: 1000,
+	port: 3000,
 	inDir: 'D:/myao-temp',
 	outDir: 'D:/myao-video',
 	ffmpeg: 'D:/ffmpeg/bin/ffmpeg.exe',
