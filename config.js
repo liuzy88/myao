@@ -1,5 +1,9 @@
-﻿let product = {
+﻿var config = {
+	dev: false,
 	port: 1000,
+	inDir: 'D:/myao-temp',
+	outDir: 'D:/myao-video',
+	ffmpeg: 'D:/ffmpeg/bin/ffmpeg.exe',
 	tags: ['萌萌哒', '卡哇伊', '乖宝宝', '美美哒', '好家伙', '小可爱', '小公举', '喜洋洋'],
 	db: {
 		host: "127.0.0.1",
@@ -17,19 +21,10 @@
 	upcb: 'http://myao.liuzy88.com/upcb'
 }
 
-let develop = product
-develop = {
-	inDir: 'D:/myao-temp',
-	outDir: 'D:/myao-video',
-	ffmpeg: 'D:/ffmpeg/bin/ffmpeg.exe',
-	qiniu: {
-		bucket: 'liuzy',
-		bucketUrl: 'http://qiniu-liuzy.liuzy88.com/',
-		ACCESS_KEY: 'pkWsJ97yNvN-adSgY46kjIH72y1mDiO-v88dK7lc',
-		SECRET_KEY: 'jIqelhXHUk-FB3iUsiMyHLEcMlaVDTFlmjZxAcKs'
-	},
-	upcb: 'http://127.0.0.1:1000/upcb'
+if (config.dev) {
+	config.qiniu.bucket = 'liuzy'
+	config.qiniu.bucketUrl = 'http://qiniu-liuzy.liuzy88.com/'
+	config.upcb = 'http://127.0.0.1:1000/upcb'
 }
 
-// module.exports = product;
-module.exports = develop;
+module.exports = config
