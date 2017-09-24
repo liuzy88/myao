@@ -4,7 +4,7 @@ const http = require('http')
 const path = require('path')
 const app = express()
 const config = require('./config')
-const EJS = require('./lib/EJS')
+const EJS = require('./lib/ejs')
 const log = require('./lib/log')
 const DB = require('./db/db')
 
