@@ -47,8 +47,7 @@ router.post('/uploaded', function(req, res, next) {
 						res.end('no')
 					}
 				}).catch(function(err) {
-					log(err.stack)
-					res.end('insert error.')
+					next(err)
 				})
 			}
 		})

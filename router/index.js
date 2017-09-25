@@ -34,6 +34,8 @@ router.get('/', function(req, res, next) {
 			let rows2 = yield DB.Myao.searchList(params)
 			res.render('index', { data: rows2 })
 		}
+	}).catch(function(err) {
+		next(err)
 	})
 })
 
@@ -46,6 +48,8 @@ router.post('/like', function(req, res, next) {
 			} else {
 				res.end('no')
 			}
+		}).catch(function(err) {
+			next(err)
 		})
 	} else {
 		res.end('end')
@@ -71,7 +75,7 @@ router.post('/upcb', function(req, res, next) {
 				res.end('no')
 			}
 		}).catch(function(err) {
-			res.end('co error.')
+			next(err)
 		})
 	} else {
 		res.end('params error.')
