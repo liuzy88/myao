@@ -6,7 +6,6 @@ const app = express()
 const config = require('./config')
 const EJS = require('./lib/ejs')
 const log = require('./lib/log')
-const DB = require('./db/db')
 
 app.set('views', path.join(__dirname, 'views'))
 app.engine('.html', require('ejs').__express)
