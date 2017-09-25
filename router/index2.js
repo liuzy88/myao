@@ -28,62 +28,15 @@ router.get('/', function(req, res, next) {
 				res.end('end')
 			} else {
 				let rows2 = yield DB.Myao.searchList(params)
-				res.render('data', { data: rows2 })
+				res.render('data2', { data: rows2 })
 			}
 		} else {
 			let rows2 = yield DB.Myao.searchList(params)
-			res.render('index', { data: rows2 })
+			res.render('index2', { data: rows2 })
 		}
 	}).catch(function(err) {
 		next(err)
 	})
-})
-
-router.post('/like', function(req, res, next) {
-	if (req.body.id > 0) {
-		co(function*() {
-			let rows = yield DB.Myao.like(req.body.id)
-			if (rows.affectedRows == 1) {
-				res.end('ok')
-			} else {
-				res.end('no')
-			}
-		}).catch(function(err) {
-			next(err)
-		})
-	} else {
-		res.end('end')
-	}
-})
-
-router.post('/upcb', function(req, res, next) {
-	let img = req.body.img
-	let sign = req.body.sign
-	if (/[\d]{14}_[\w]{32}\.[\w]{3}/.test(img) && /[\w]{32}/.test(sign)) {
-		co(function*() {
-			let ctime = img.split('_')[0]
-			let hash = img.split('_')[1].split('.')[0]
-			let rows = yield DB.Myao.replace({
-				hash: hash,
-				img: img,
-				ctime: ctime,
-				cdn: 1
-			})
-			if (rows.affectedRows == 1) {
-				res.end('ok')
-			} else {
-				res.end('no')
-			}
-		}).catch(function(err) {
-			next(err)
-		})
-	} else {
-		res.end('params error.')
-	}
-})
-
-router.get('/test', function(req, res, next) {
-	res.render('test')
 })
 
 module.exports = router

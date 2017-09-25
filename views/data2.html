@@ -1,0 +1,25 @@
+<% for (i in data) { %>
+<div class="item <%=i==0?'item-show':''%>" id="item<%=data[i].id%>">
+	<div class="item-body">
+		<div class="title">
+			<div class="ctime"><%=EJS.date(data[i].ctime)%></div>
+			<div class="share"><span>分享</span><img src="imgs/share.png" width="64" height="64"></div>
+		</div>
+		<div class="main">
+			<% if (data[i].img.endsWith('.mp4')) { %>
+			<video width="auto" height="100%" controls="controls" preload="none" poster="<%=EJS.video(data[i].img)%>?vframe/jpg/offset/0" webkit-playsinline="true" playsinline="true" x-webkit-airplay="true" x5-video-player-type="h5" x5-video-orientation="h5" x5-video-player-fullscreen="true">
+				<source src="<%=EJS.video(data[i].img)%>" type="video/mp4">
+			</video>
+			<% } else { %>
+			<img src="<%=EJS.url(data[i])%>" width="auto" height="100%">
+			<% } %>
+		</div>
+		<div class="doit">
+			<div class="like" onclick="like('<%=data[i].id%>');"><em>Ψ.</em>赞(<%=data[i].like%>)</div>
+			<div class="comment"><em>Θ.</em>评论(99)</div>
+		</div>
+		<div class="info"><%=data[i].text||'什么都没写...'%></div>
+	</div>
+	<div class="item-warp"></div>
+</div>
+<%}%>
