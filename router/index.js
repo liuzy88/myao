@@ -7,7 +7,7 @@ const config = require('../config')
 router.get('/', function(req, res, next) {
 	let params = { page: 1, rows: 10 }
 	if (req.query.t == 1) {
-		params._orderby = "`like`,`ctime` DESC"
+		params._orderby = "`like` DESC,`ctime` DESC"
 	} else if (req.query.t == 2) {
 		params._orderby = "`ctime` DESC"
 	} else if (req.query.t == 3) {
