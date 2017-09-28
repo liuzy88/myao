@@ -10,7 +10,8 @@
 		port: 3306,
 		user: "root",
 		password: "111111",
-		database: "myao"
+		database: "myao",
+		timezone: "08:00"
 	},
 	qiniu: {
 		bucket: 'myao',

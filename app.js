@@ -18,6 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/', require('./router/index'))
+app.use('/api', require('./router/api'))
 app.use('/index2', require('./router/index2'))
 app.use('/upload', require('./router/upload'))
 
