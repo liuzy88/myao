@@ -29,13 +29,15 @@ var storage = {
         try {
             return JSON.parse(localStorage.getItem('myao_likes'));
         } catch (e) {
-            return null;
+            return window ? window[key] : null;
         }
     },
     set: function(key, val) {
         try {
             localStorage.setItem(key, JSON.stringify(val));
-        } catch (e) {}
+        } catch (e) {
+            if(window) window[key] = val;
+        }
     }
 }
 // 点赞
@@ -52,7 +54,6 @@ function like(id) {
             storage.set('myao_likes', likes);
         }
     });
-    return false;
 }
 // 加载下一页
 var nextPage = 2;
