@@ -24,9 +24,23 @@ function showTip(msg) {
         $('.tip').fadeOut();
     }, 1500);
 }
+var storage = {
+    get: function(key) {
+        try {
+            return JSON.parse(localStorage.getItem('myao_likes'));
+        } catch (e) {
+            return null;
+        }
+    },
+    set: function(key, val) {
+        try {
+            localStorage.setItem(key, JSON.stringify(val));
+        } catch (e) {}
+    }
+}
 // 点赞
 function like(id) {
-    var likes = JSON.parse(localStorage.getItem('myao_likes')) || {};
+    var likes = storage.get('myao_likes') || {};
     if (likes[id]) return;
     $.post('/like', {
         id: id
@@ -35,7 +49,7 @@ function like(id) {
             likes[id] = true;
             var em = $('[data-id="' + id + '"]');
             em.html(parseInt(em.text()) + 1);
-            localStorage.setItem('myao_likes', JSON.stringify(likes));
+            storage.set('myao_likes', likes);
         }
     });
     return false;

@@ -1,3 +1,8 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-family: Arial;
     background-image: url('/imgs/bg.jpg');
@@ -16,6 +21,17 @@ img {
 
 em {
     font-style: normal;
+}
+
+.main {
+    max-width: 320px;
+    height: 100%;
+    margin: auto;
+}
+
+.nav {
+    position: relative;
+    margin: 10px 0;
 }
 
 .nav ul {
@@ -45,7 +61,7 @@ em {
 
 .nav a {
     position: absolute;
-    top: 4px;
+    top: -4px;
     right: 9px;
     width: 28px;
     height: 28px;
