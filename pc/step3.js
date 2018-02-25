@@ -44,7 +44,7 @@ qiniu.conf.SECRET_KEY = config.qiniu.SECRET_KEY
 
 let workCount = 20 // 工作个数
 let works = [] // 工作者
-for (let i = 1 i <= workCount i++) {
+for (let i = 1; i <= workCount; i++) {
 	works.push('work_' + i)
 }
 let files = MF.listFiles(outDir) // 工作内容
