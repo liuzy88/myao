@@ -6,7 +6,7 @@ const log = require('../lib/log')
 const MF = require('../lib/mf')
 const config = require('../config')
 
-const exe = config.exe
+const ffmpeg = config.ffmpeg
 const inDir = config.inDir
 const outDir = config.outDir
 
@@ -26,7 +26,7 @@ function convert(i) {
 	let f = files[i]
 	if (f) {
 		log('convert:', f, (i + 1) + '/' + files.length, '......', ((i + 1) / files.length * 100).toFixed(2) + '%')
-		let cmd = spawn(exe, ['-i', path.join(inDir, f), '-vcodec', 'h264', '-y', path.join(outDir, f)])
+		let cmd = spawn(ffmpeg, ['-i', path.join(inDir, f), '-vcodec', 'h264', '-y', path.join(outDir, f)])
 		cmd.stdout.on('data', function(data) {
 			// log('cmd out:', data)
 		})
