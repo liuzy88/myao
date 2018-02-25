@@ -70,9 +70,9 @@ router.post('/upcb', function(req, res, next) {
 				cdn: 1
 			})
 			if (rows.affectedRows == 1) {
-				res.end('ok')
+				res.end('ok, ' + img)
 			} else {
-				res.end('no')
+				res.end('no, ' + img)
 			}
 		}).catch(function(err) {
 			next(err)

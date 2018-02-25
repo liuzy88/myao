@@ -28,9 +28,9 @@ function remember(f) {
 	fs.appendFileSync(upstat, f + '\n', {})
 	request.post({
 		url: config.upcb,
-		form: { img: f, sign: MF.md5(img + config.upcb) }
+		form: { img: f, sign: MF.md5(f + config.upcb) }
 	}, function(err, res, body) {
-		console.log(body)
+		log(body)
 	})
 }
 
@@ -67,7 +67,7 @@ function working(work, f) {
 				let token = putPolicy.token()
 				qiniu.io.putFile(token, f, path.join(outDir, f), null, function(err, ret) {
 					if (err) {
-						log(work, 'upload error:', f, err)
+						log(work, 'upload error:', f, err.stack)
 						works.push(work)
 					} else {
 						// 上传成功
