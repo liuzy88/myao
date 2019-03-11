@@ -16,6 +16,9 @@ router.get('/', function(req, res, next) {
 	} else if (req.query.t == 4) {
 		params._where = "`img` LIKE '%.mp4'"
 		params._orderby = "`ctime` DESC"
+	} else if (req.query.t == 5) {
+		params._where = "`img` LIKE '%.mp4'"
+		params._orderby = "`ctime`"
 	} else {
 		params._orderby = "`ctime` DESC"
 	}
